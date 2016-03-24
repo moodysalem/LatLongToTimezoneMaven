@@ -90,6 +90,9 @@ public class TimeZoneMapperTest {
         int total = succeeded + failed;
         LOG.info(String.format("Failed: %s out of %s; %s accurate", failed, total,
             Math.round(((((double) succeeded) / (total)) * 100)) + "%"));
+
+        // no more than 5% failure
+        assertTrue("No more than 5% of the tests may fail", ((double) failed) / total < 0.05);
     }
 
 }
