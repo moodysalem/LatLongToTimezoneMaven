@@ -73,8 +73,8 @@ public class TimeZoneMapperTest {
     public void runTestCases() {
         int succeeded = 0, failed = 0;
         for (TestData d : testData) {
-            String timezone = TimeZoneMapper.tzNameAt(d.getLat(), d.getLng());
-            ZoneId zone = TimeZoneMapper.tzAt(d.getLat(), d.getLng());
+            String timezone = TimezoneMapper.tzNameAt(d.getLat(), d.getLng());
+            ZoneId zone = TimezoneMapper.tzAt(d.getLat(), d.getLng());
 
             String error = String.format(EXPECT_ERROR, d.getName(), d.getLat(), d.getLng(), d.getExpectedTimezone(), timezone);
             try {

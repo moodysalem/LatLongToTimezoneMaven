@@ -5,12 +5,12 @@ import java.time.ZoneId;
 /**
  * Provides a method for looking up the timezone ID for a latitude longitude pair
  */
-public class TimeZoneMapper {
+public class TimezoneMapper {
 
     /**
      * Prevent instantiating an instance of this class
      */
-    private TimeZoneMapper() {
+    private TimezoneMapper() {
     }
 
     public static ZoneId tzAt(double lat, double lng) {
