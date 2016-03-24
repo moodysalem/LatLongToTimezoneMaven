@@ -18,7 +18,7 @@ import static org.testng.AssertJUnit.assertTrue;
 
 public class TimeZoneMapperTest {
 
-    private static final String EXPECT_ERROR = "Lat: %s, Lng: %s, Expected: %s, Got: %s";
+    private static final String EXPECT_ERROR = "City: %s, Lat: %s, Lng: %s, Expected: %s, Got: %s";
     private static final Logger LOG = Logger.getLogger(TimeZoneMapperTest.class.getName());
 
     public static class TestData {
@@ -71,18 +71,25 @@ public class TimeZoneMapperTest {
 
     @Test
     public void runTestCases() {
+        int succeeded = 0, failed = 0;
         for (TestData d : testData) {
             String timezone = TimeZoneMapper.tzNameAt(d.getLat(), d.getLng());
             ZoneId zone = TimeZoneMapper.tzAt(d.getLat(), d.getLng());
 
-            String error = String.format(EXPECT_ERROR, d.getLat(), d.getLng(), d.getExpectedTimezone(), timezone);
+            String error = String.format(EXPECT_ERROR, d.getName(), d.getLat(), d.getLng(), d.getExpectedTimezone(), timezone);
             try {
                 assertTrue(error, d.getExpectedTimezone().equals(timezone));
                 assertTrue(error, ZoneId.of(d.getExpectedTimezone()).equals(zone));
+                succeeded++;
             } catch (AssertionError e) {
-                LOG.severe(e.getMessage());
+                failed++;
+                LOG.warning(e.getMessage());
             }
         }
+
+        int total = succeeded + failed;
+        LOG.info(String.format("Failed: %s out of %s; %s accurate", failed, total,
+            Math.round(((((double) succeeded) / (total)) * 100)) + "%"));
     }
 
 }
