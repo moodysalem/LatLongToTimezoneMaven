@@ -4,7 +4,7 @@
 
   <groupId>com.moodysalem</groupId>
   <artifactId>LatLongToTimezoneMaven</artifactId>
-  <version>1.0</version>
+  <version>1.1-SNAPSHOT</version>
 
 
   <name>${project.groupId}:${project.artifactId}</name>
@@ -24,7 +24,7 @@
     <url>https://github.com/moodysalem/LatLongToTimezoneMaven</url>
     <connection>scm:git:https://github.com/moodysalem/LatLongToTimezoneMaven.git</connection>
     <developerConnection>scm:git:https://github.com/moodysalem/LatLongToTimezoneMaven.git</developerConnection>
-    <tag>LatLongToTimezoneMaven-1.0</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <developers>
