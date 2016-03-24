@@ -1,2 +1,2 @@
 # LatLongToTimezoneMaven
-Deploy LatLongToTimezone to Maven
+Deploy [LatLongToTimezone](https://github.com/drtimcooper/LatLongToTimezone) to Maven
