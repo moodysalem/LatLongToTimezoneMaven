@@ -11,6 +11,8 @@ import java.io.InputStreamReader;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -71,8 +73,9 @@ public class TimeZoneMapperTest {
 
     @Test
     public void runTestCases() {
-        int succeeded = 0, failed = 0;
-        for (TestData d : testData) {
+        final AtomicInteger succeeded = new AtomicInteger(0), failed = new AtomicInteger(0);
+
+        final Consumer<TestData> tester = (d) -> {
             String timezone = TimezoneMapper.tzNameAt(d.getLat(), d.getLng());
             ZoneId zone = TimezoneMapper.tzAt(d.getLat(), d.getLng());
 
@@ -80,19 +83,24 @@ public class TimeZoneMapperTest {
             try {
                 assertTrue(error, d.getExpectedTimezone().equals(timezone));
                 assertTrue(error, ZoneId.of(d.getExpectedTimezone()).equals(zone));
-                succeeded++;
+                succeeded.incrementAndGet();
             } catch (AssertionError e) {
-                failed++;
+                failed.incrementAndGet();
                 LOG.warning(e.getMessage());
             }
-        }
+        };
 
-        int total = succeeded + failed;
+        testData.forEach(tester);
+
+        // hand entered test cases
+        tester.accept(new TestData("Chicago, IL", 41.8369, -87.6847, "America/Chicago"));
+
+        final int total = succeeded.get() + failed.get();
         LOG.info(String.format("Failed: %s out of %s; %s accurate", failed, total,
-            Math.round(((((double) succeeded) / (total)) * 100)) + "%"));
+            Math.round(((((double) succeeded.get()) / (total)) * 100)) + "%"));
 
         // no more than 5% failure
-        assertTrue("No more than 5% of the tests may fail", ((double) failed) / total < 0.05);
+        assertTrue("No more than 5% of the tests may fail", ((double) failed.get()) / total < 0.05);
     }
 
 }
