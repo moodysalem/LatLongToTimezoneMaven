@@ -9,11 +9,11 @@ If at least 95% of the test cases succeed, the build passes. Last checked was 98
 ## Usage
 1. Add the maven dependency to your project
     
-    <dependency>
-        <groupId>com.moodysalem</groupId>
-        <artifactId>LatLongToTimezoneMaven</artifactId>
-        <version>{see-above-for-version!}</version>
-    </dependency>
+        <dependency>
+            <groupId>com.moodysalem</groupId>
+            <artifactId>LatLongToTimezoneMaven</artifactId>
+            <version>{see-above-for-version!}</version>
+        </dependency>
     
 2. Call the static methods on the TimezoneMapper class
 
