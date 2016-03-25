@@ -4,7 +4,7 @@ This repository deploys [LatLongToTimezone](https://github.com/drtimcooper/LatLo
 ## Tests
 Tests are run against a file from [geonames.org](http://www.geonames.org) referenced in [this SO question](http://stackoverflow.com/questions/5584602/determine-timezone-from-latitude-longitude-without-using-web-services-like-geona/5584826#5584826)
 
-If at least 95% of the test cases succeed, the build passes. Last checked was 98%.
+If at least 95% of the test cases succeed, the build passes. Last checked was 98%. Visit travis to see logs for test failures
 
 ## Usage
 1. Add the maven dependency to your project
