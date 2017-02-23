@@ -127,6 +127,8 @@
   </profiles>
   <build>
     <plugins>
+
+      <!--Verifies that the src is java 1.7 compatible-->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>animal-sniffer-maven-plugin</artifactId>
