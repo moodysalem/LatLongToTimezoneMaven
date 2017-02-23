@@ -20,6 +20,4 @@ If at least 95% of the test cases succeed, the build passes. Last checked was 98
 
     `TimezoneMapper.tzNameAt(double lat, double lng);`
     
-    `TimezoneMapper.tzAt(double lat, double lng);`
-    
 
