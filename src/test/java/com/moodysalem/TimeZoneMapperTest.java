@@ -8,15 +8,13 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static org.testng.AssertJUnit.assertTrue;
+import static org.testng.AssertJUnit.*;
 
 public class TimeZoneMapperTest {
 
@@ -75,25 +73,19 @@ public class TimeZoneMapperTest {
     public void runTestCases() {
         final AtomicInteger succeeded = new AtomicInteger(0), failed = new AtomicInteger(0);
 
-        final Consumer<TestData> tester = (d) -> {
-            String timezone = TimezoneMapper.tzNameAt(d.getLat(), d.getLng());
-            ZoneId zone = TimezoneMapper.tzAt(d.getLat(), d.getLng());
+        for (TestData data: testData) {
+            String timezone = TimezoneMapper.tzNameAt(data.getLat(), data.getLng());
 
-            String error = String.format(EXPECT_ERROR, d.getName(), d.getLat(), d.getLng(), d.getExpectedTimezone(), timezone);
+            String error = String.format(EXPECT_ERROR, data.getName(), data.getLat(), data.getLng(),
+                    data.getExpectedTimezone(), timezone);
             try {
-                assertTrue(error, d.getExpectedTimezone().equals(timezone));
-                assertTrue(error, ZoneId.of(d.getExpectedTimezone()).equals(zone));
+                assertTrue(error, data.getExpectedTimezone().equals(timezone));
                 succeeded.incrementAndGet();
             } catch (AssertionError e) {
                 failed.incrementAndGet();
                 LOG.warning(e.getMessage());
             }
-        };
-
-        testData.forEach(tester);
-
-        // hand entered test cases
-        tester.accept(new TestData("Chicago, IL", 41.8369, -87.6847, "America/Chicago"));
+        }
 
         final int total = succeeded.get() + failed.get();
         LOG.info(String.format("Failed: %s out of %s; %s accurate", failed, total,

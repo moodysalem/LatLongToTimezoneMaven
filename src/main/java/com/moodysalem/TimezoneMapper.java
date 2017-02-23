@@ -1,6 +1,5 @@
 package com.moodysalem;
 
-import java.time.ZoneId;
 
 /**
  * Provides a method for looking up the timezone ID for a latitude longitude pair
@@ -10,16 +9,7 @@ public class TimezoneMapper {
     /**
      * Prevent instantiating an instance of this class
      */
-    private TimezoneMapper() {
-    }
-
-    public static ZoneId tzAt(double lat, double lng) {
-        String zone = tzNameAt(lat, lng);
-        if ("unknown".equals(zone)) {
-            return null;
-        }
-        return ZoneId.of(zone);
-    }
+    private TimezoneMapper() {}
 
     public static String tzNameAt(double lat, double lng) {
         return timezoneStrings[getTzInt((float) lat, (float) lng)];
