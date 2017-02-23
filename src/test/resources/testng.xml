@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="TimezoneMapperTestSuite">
+  <test name="TimezoneMapperTest">
+    <classes>
+      <class name="com.moodysalem.TimezoneMapperTest" />
+    </classes>
+
+  </test>
+</suite>
